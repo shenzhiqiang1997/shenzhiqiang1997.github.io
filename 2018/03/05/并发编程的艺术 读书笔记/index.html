@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-03-05</span>
-            <span class="time">23:50:09</span>
+            <span class="time">23:52:04</span>
           </span>
           
           <!--  Categories  -->
@@ -124,7 +124,7 @@
         <div class="post-content">
           <h2 id="并发编程的挑战"><a href="#并发编程的挑战" class="headerlink" title="并发编程的挑战"></a>并发编程的挑战</h2><ul>
 <li>上下文切换<ol>
-<li>CPU为多个线程分配时间片，每执行一个时间片后将进行下一个任务，并产生上下文切换（保存山歌任务的状态并加载下个任务的状态），上下文切换会影响多线程的执行速度。</li>
+<li>CPU为多个线程分配时间片，每执行一个时间片后将进行下一个任务，并产生上下文切换（保存上个任务的状态并加载下个任务的状态），上下文切换会影响多线程的执行速度。</li>
 <li>线程的创建和上下文切换需要额外开销，当并发程序片段执行次数较少时尤为明显。</li>
 <li>线程的Waiting和Runnable状态之间的转换会进行上下文切换。<a id="more"></a></li>
 </ol>
