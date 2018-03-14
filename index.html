@@ -94,6 +94,40 @@
     <div class="col-lg-10 col-md-10 col-md-offset-1">
       
         <div class="post-item-wrapper">
+  <a href="/2018/03/15/剑指offer题/" class="post-title">
+      剑指offer题
+  </a>
+  <div class="post-excerpt">
+    <!-- Post Date and Categories -->
+    <div class="date-and-category">
+      <div class="date">2018-03-15</div>
+      <div class="categories">
+        
+          
+
+<a href="/categories/算法/">算法</a>
+
+        
+      </div>
+    </div>
+    <!-- Post Excerpt -->
+    <div class="excerpt typo"><ul>
+<li><p>剪绳子<br>给定一根长度为n的绳子，请把绳子剪成m段（m、n都是整数，n&gt;1并且m&gt;1），每段绳子的长度记为k[0],k[1],…,k[m]。请问k[0]<em> k[1] </em> … *k[m]可能的最大乘积是多少？</p></div>
+    <!-- Post Tags -->
+    <div class="tags">
+      
+        
+
+<a class="tag" href="/tags/算法/">算法</a> <a class="tag" href="/tags/题目/">题目</a>
+
+
+      
+    </div>
+  </div>
+</div>
+
+      
+        <div class="post-item-wrapper">
   <a href="/2018/03/08/代理模式小记/" class="post-title">
       代理模式小记
   </a>
@@ -128,50 +162,6 @@
 
       
         <div class="post-item-wrapper">
-  <a href="/2018/03/08/并发编程的艺术/" class="post-title">
-      并发编程的艺术 读书笔记
-  </a>
-  <div class="post-excerpt">
-    <!-- Post Date and Categories -->
-    <div class="date-and-category">
-      <div class="date">2018-03-08</div>
-      <div class="categories">
-        
-          
-
-<a href="/categories/并发/">并发</a>
-
-        
-      </div>
-    </div>
-    <!-- Post Excerpt -->
-    <div class="excerpt typo"><h2 id="并发编程的挑战"><a href="#并发编程的挑战" class="headerlink" title="并发编程的挑战"></a>并发编程的挑战</h2><ul>
-<li>上下文切换<ol>
-<li>CPU为多个线程分配时间片，每执行一个时间片后将进行下一个任务，并产生上下文切换（保存山歌任务的状态并加载下个任务的状态），上下文切换会影响多线程的执行速度。</li>
-<li>线程的创建和上下文切换需要额外开销，当并发程序片段执行次数较少时尤为明显。</li>
-<li>线程的Waiting和Runnable状态之间的转换会进行上下文切换。</li>
-</ol>
-</li>
-<li>减少上下文切换的方法<ol>
-<li>无锁并发编程：多线程竞争锁会导致上下文切换，可以通过避免使用锁来减少上下文切换。例：数据ID%线程数 让不同线程处理一部分数据。</li>
-<li>CAS算法：Atomic中的CAS算法更新数据不需要加锁。</li>
-<li>使用最少的线程：在任务很少的时候尽量创建少的线程来避免线程等待带来上下文切换。</li>
-<li>协程：用一个线程调度多个任务。</div>
-    <!-- Post Tags -->
-    <div class="tags">
-      
-        
-
-<a class="tag" href="/tags/多线程/">多线程</a> <a class="tag" href="/tags/Java/">Java</a> <a class="tag" href="/tags/并发/">并发</a>
-
-
-      
-    </div>
-  </div>
-</div>
-
-      
-        <div class="post-item-wrapper">
   <a href="/2018/03/08/Callable和FutureTask执行异步任务/" class="post-title">
       Callable和FutureTask执行异步任务
   </a>
@@ -196,7 +186,7 @@
       
         
 
-<a class="tag" href="/tags/多线程/">多线程</a> <a class="tag" href="/tags/Java/">Java</a>
+<a class="tag" href="/tags/Java/">Java</a> <a class="tag" href="/tags/多线程/">多线程</a>
 
 
       
@@ -234,6 +224,50 @@
         
 
 <a class="tag" href="/tags/Java/">Java</a> <a class="tag" href="/tags/进阶/">进阶</a>
+
+
+      
+    </div>
+  </div>
+</div>
+
+      
+        <div class="post-item-wrapper">
+  <a href="/2018/03/05/并发编程的艺术/" class="post-title">
+      并发编程的艺术 读书笔记
+  </a>
+  <div class="post-excerpt">
+    <!-- Post Date and Categories -->
+    <div class="date-and-category">
+      <div class="date">2018-03-05</div>
+      <div class="categories">
+        
+          
+
+<a href="/categories/并发/">并发</a>
+
+        
+      </div>
+    </div>
+    <!-- Post Excerpt -->
+    <div class="excerpt typo"><h2 id="并发编程的挑战"><a href="#并发编程的挑战" class="headerlink" title="并发编程的挑战"></a>并发编程的挑战</h2><ul>
+<li>上下文切换<ol>
+<li>CPU为多个线程分配时间片，每执行一个时间片后将进行下一个任务，并产生上下文切换（保存山歌任务的状态并加载下个任务的状态），上下文切换会影响多线程的执行速度。</li>
+<li>线程的创建和上下文切换需要额外开销，当并发程序片段执行次数较少时尤为明显。</li>
+<li>线程的Waiting和Runnable状态之间的转换会进行上下文切换。</li>
+</ol>
+</li>
+<li>减少上下文切换的方法<ol>
+<li>无锁并发编程：多线程竞争锁会导致上下文切换，可以通过避免使用锁来减少上下文切换。例：数据ID%线程数 让不同线程处理一部分数据。</li>
+<li>CAS算法：Atomic中的CAS算法更新数据不需要加锁。</li>
+<li>使用最少的线程：在任务很少的时候尽量创建少的线程来避免线程等待带来上下文切换。</li>
+<li>协程：用一个线程调度多个任务。</div>
+    <!-- Post Tags -->
+    <div class="tags">
+      
+        
+
+<a class="tag" href="/tags/Java/">Java</a> <a class="tag" href="/tags/多线程/">多线程</a> <a class="tag" href="/tags/并发/">并发</a>
 
 
       
