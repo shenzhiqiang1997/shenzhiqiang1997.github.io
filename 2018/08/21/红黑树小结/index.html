@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="no one">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="重建博客"/>
+  <meta property="og:title" content="简单剖析红黑树"/>
   <meta property="og:description" content="" />
   <meta property="og:site_name" content="no one&#39;s blog"/>
   <meta property="og:type" content="article" />
@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">重建博客</p>
+          <p class="title">简单剖析红黑树</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -99,14 +99,14 @@
           
           <!-- Date -->
           <span class="date-time info">On
-            <span class="date">2018-02-26</span>
+            <span class="date">2018-08-21</span>
             <span class="time">11:38:22</span>
           </span>
           
           <!--  Categories  -->
             <span class="categories info">Under 
 
-<a href="/categories/日常/">日常</a>
+<a href="/categories/数据结构/">数据结构</a>
 </span>
           
         </div>
@@ -115,14 +115,23 @@
           <div class="post-tags text-muted">
             Tags: 
 
-<a class="tag" href="/tags/闲言/">#闲言</a>
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/数据结构/">#数据结构</a>
 
 
           </div>
         
         <!-- Post Main Content -->
         <div class="post-content">
-          <h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><p><strong>Hello! I’m no one. I’m new here. <br><br><a id="more"></a><br>How beautiful the code world is! </strong></p>
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>在Java容器实现中，当哈希冲突的情况较为严重时，经常选择将链表升级为红黑树来提高效率。<br>红黑树是一棵自平衡的二叉搜索树，它是由AVL变化而来的。<br><a id="more"></a><br><img src="https://note.youdao.com/yws/public/resource/708ad1b1ee41c2b335e0cac5c8d83d03/xmlnote/A37FF2E5185F45288B9ACC35EC773405/13747" alt="image"></p>
+<h1 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h1><p>红黑树有以下特点  </p>
+<pre><code>1. 一个节点不是红色的就是黑色的
+2. 根节点是黑色的
+3. 叶节点（一般为NULL节点）是黑色的
+4. 一个红色节点的子节点必须是黑色的
+5. 从根节点到任意叶节点的所有路径的黑色节点个数相同
+</code></pre><p>上面这些性质使得红黑树中最长路径的长度不会大于最短路径的长度的两倍，这也使得红黑树是较为平衡的。</p>
+<h1 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h1><p>为什么红黑树中最长路径路径的长度不会大于最短路径的长度的两倍<br>首先假设最短路径上的黑色节点数为n<br>根据性质5我们可以知道最长路径上的黑色节点数也为n，<br>如果最长路径全为黑色节点那么则是最长路径最短的情况，长度为n。<br>结合性质4考虑出最长路径的最长情况，则是最长路径红黑相间，并且黑色节点与红色节点数量相同，长度为2n。<br>再考虑最短路径上可能会有红色节点，也就是说最短路径的长度&gt;=n。<br>综上可以证明红黑树的最长路径的长度不会大于最短路径的2倍。  </p>
+<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>既然知道了Java容器偏爱红黑树，可为什么要选择红黑树呢。<br>我们知道AVL的搜索速度很快，但是由于AVL是近乎完美平衡的，这就导致了每次插入和删除时需要花费较大的开销计算平衡因子以此为依据来调整树的结构来使得其恢复为AVL。<br>而Java容器会频繁的插入和删除的操作，就需要使用AVL的变种，这种变种必须要能够提高插入和删除的效率，而红黑树恰恰就是满足这样要求的数据结构，红黑树选择了放弃一部分的平衡性来换取插入和删除时的效率。<br>由于并不像AVL那样高度平衡，使得红黑树的查询速度稍微稍变得慢了一些。<br>总体上红黑树的查询、搜索、删除的时间复杂度为O(logn)，搜索速度稍逊于AVL，插入和删除速度优于AVL。<br>这就是Java容器选择红黑树作为哈希冲突解决方案的数据结构的原因</p>
 
         </div>
       </div>
