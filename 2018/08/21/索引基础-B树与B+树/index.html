@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-08-21</span>
-            <span class="time">17:31:44</span>
+            <span class="time">17:53:42</span>
           </span>
           
           <!--  Categories  -->
@@ -115,7 +115,7 @@
           <div class="post-tags text-muted">
             Tags: 
 
-<a class="tag" href="/tags/数据结构/">#数据结构</a>
+<a class="tag" href="/tags/数据结构/">#数据结构</a> <a class="tag" href="/tags/索引/">#索引</a> <a class="tag" href="/tags/数据库/">#数据库</a>
 
 
           </div>
@@ -146,8 +146,9 @@
 </code></pre><h2 id="原因-1"><a href="#原因-1" class="headerlink" title="原因"></a>原因</h2><p>在B+树中，非叶节点成为了叶节点的索引，而叶节点中关键字的指针才是真正的数据所在。<br>为什么要这样设计B+树，原因有两个  </p>
 <ol>
 <li>相比于B树中非叶节点中的关键字也带有指针来说，现在B+树的非叶节点中的关键字没有了指针，一个结点所能放置的关键字也就增多了，如果让这些关键字存放在相同的磁盘块中，那么就可以减少磁盘读写次数。</li>
-<li>由于叶子节点使用指针链接成了一个有序的链表，那么仅仅通过遍历叶子节点就能遍历整棵树，从而优化大范围的查询和扫描。  <h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1>我们可以看到，选用B树和B+树作为索引的数据结构，都是为了减少磁盘读写次数或提高查询效率。</li>
+<li>由于叶子节点使用指针链接成了一个有序的链表，那么仅仅通过遍历叶子节点就能遍历整棵树，从而优化大范围的查询和扫描。  </li>
 </ol>
+<h1 id="总结"><a href="#总结" class="headerlink" title="总结"></a>总结</h1><p>我们可以看到，选用B树和B+树作为索引的数据结构，都是为了减少磁盘读写次数或提高查询效率。</p>
 
         </div>
       </div>
