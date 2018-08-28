@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-08-22</span>
-            <span class="time">12:25:14</span>
+            <span class="time">17:46:58</span>
           </span>
           
           <!--  Categories  -->
@@ -124,7 +124,7 @@
         <div class="post-content">
           <h1 id="B-Tree索引"><a href="#B-Tree索引" class="headerlink" title="B+Tree索引"></a>B+Tree索引</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>B+Tree索引是MySQL中大多引擎的默认索引方式。<br>使用B+Tree查找只需要遍历B+Tree而不是全文扫描，它支持全键值查找、键值范围查找和最左前缀查找。除了查找它还在支持排序和分组。<br>B+Tree的索引分为两类：聚簇索引和非聚簇索引。<br><a id="more"></a></p>
 <h2 id="聚簇索引"><a href="#聚簇索引" class="headerlink" title="聚簇索引"></a>聚簇索引</h2><p>聚簇索引中数据行的存储顺序与索引的顺序是一致的。<br>从B+Tree的角度来看，聚簇索引的叶节点将索引值和数据行存放在一起，因而一个表只能有一个聚簇索引。<br>MySQL中InnoDB引擎采用的是聚簇索引，它的主索引的叶节点存放了数据行，而辅助索引的叶节点存放的是主索引值，需要再到主索引中查找才能找到数据行。</p>
-<h2 id="非聚簇索引"><a href="#非聚簇索引" class="headerlink" title="非聚簇索引"></a>非聚簇索引</h2><p>非聚簇索引中数据行的存储顺序与索引的顺序无关。<br>从B+Tree的角度来看，非聚簇索引的叶节点将索引值和数据航的地址或者索引值存放在一起。<br>MySQL中MyISAM引擎采用的是非聚簇索引，它的主索引和辅助索引的叶节点都存放的是数据行的地址。  <img src="https://note.youdao.com/yws/public/resource/708ad1b1ee41c2b335e0cac5c8d83d03/xmlnote/7856CF84AAB64246BD91911C8C4CA2C3/14351" alt="image">  </p>
+<h2 id="非聚簇索引"><a href="#非聚簇索引" class="headerlink" title="非聚簇索引"></a>非聚簇索引</h2><p>非聚簇索引中数据行的存储顺序与索引的顺序无关。<br>从B+Tree的角度来看，非聚簇索引的叶节点将索引值和数据航的地址或者索引值存放在一起。<br>MySQL中MyISAM引擎采用的是非聚簇索引，它的主索引和辅助索引的叶节点都存放的是数据行的地址。  <img src="https://note.youdao.com/yws/public/resource/708ad1b1ee41c2b335e0cac5c8d83d03/xmlnote/3CD320133F9041DB8ACE135AB6F3212A/14765" alt="image">  </p>
 <center>InnoDB引擎和MyISAM引擎的索引比较</center>  
 
 <h1 id="哈希索引"><a href="#哈希索引" class="headerlink" title="哈希索引"></a>哈希索引</h1><p>哈希索引可以使得查找的时间复杂度为O(1)，但是它只支持精确查找，并不能像B+Tree索引进行范围查找，并且它不支持分组和排序。<br>在MySQL的InnoDB引擎中，如果一个索引经常被访问，则会为该索引建立一个哈希索引来加快查询。  </p>

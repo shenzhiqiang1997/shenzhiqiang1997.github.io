@@ -8,10 +8,10 @@
   <meta name="description" content="">
   <meta name="author" content="no one">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="Exception和RuntimeException的区别"/>
+  <meta property="og:title" content="no one&#39;s blog"/>
   <meta property="og:description" content="" />
   <meta property="og:site_name" content="no one&#39;s blog"/>
-  <meta property="og:type" content="article" />
+  <meta property="og:type" content="website" />
   <meta property="og:image" content="http://henzhiqiang1997.github.io"/>
   
     <link rel="alternate" href="/atom.xml" title="no one&#39;s blog" type="application/atom+xml">
@@ -35,7 +35,8 @@
 </head>
 
   <body>
-    <!-- Page Header -->
+    <!-- Archive Header -->
+<!-- Page Header -->
 
 
 <header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
@@ -43,7 +44,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">Exception和RuntimeException的区别</p>
+          <p class="title">Blog Archives</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -88,50 +89,41 @@
   </div>
 </header>
 
-<article>
-  <div class="container typo">
-    <div class="row">
-      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-        <div class="post-info text-muted">
-          
-            <!-- Author -->
-            <span class="author info">By no one</span>
-          
-          <!-- Date -->
-          <span class="date-time info">On
-            <span class="date">2018-07-24</span>
-            <span class="time">17:46:58</span>
-          </span>
-          
-          <!--  Categories  -->
-            <span class="categories info">Under 
+<!-- Archive List -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+      
+        <div class="archive-item">
+  <a href="/2018/08/21/简单剖析红黑树/" class="post-title">
+    简单剖析红黑树
+  </a>
+  <div class="date text-muted">Posted on 2018-08-21 11:25:00</div>
+</div>
 
-<a href="/categories/Java/">Java</a>
-</span>
-          
-        </div>
-        <!-- Tags -->
-        
-          <div class="post-tags text-muted">
-            Tags: 
+      
 
-<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/基础/">#基础</a>
-
-
-          </div>
-        
-        <!-- Post Main Content -->
-        <div class="post-content">
-          <ul>
-<li>首先两者的本质不同在于<br><strong>Exception</strong>为编译时异常，也称为被检查的异常，必须在编译阶段进行检查，并由<strong>try-catch程序处理</strong>。<br><strong>RuntimeException</strong>为运行时异常，也称为不被检查的异常，在编译阶段不会被检查，当发生时交由<strong>JVM处理</strong>。  <a id="more"></a></li>
-<li>其次两者的使用场景不同在于<br><strong>RuntimeException</strong>:当发生异常时，<strong>无论怎么补救，程序都无法继续执行</strong>下去时，考虑使用或者继承RuntimeExcpetion。<br>例如0作为除数进行运算的异常发生之后，对该结果数的后续运算无法继续下去了，就要考虑采用RuntimeException将该异常交由JVM来处理。<br><strong>Exception</strong>:当发生异常时，如果<strong>通过一定的处理来补救，程序仍能继续执行下去</strong>，考虑使用或者继承Exception。<br>例如创建File对象时目标的文件不存在的异常发生之后，只是一个文件无法打开而已，接下来的部分可以通过try-catch程序来进行提示并从而使得后续程序继续运行下去，就要考虑采用Exception在编译时强制程序员考虑该异常情况。</li>
-</ul>
-
-        </div>
-      </div>
     </div>
   </div>
-</article>
+</div>
+<!-- Pagination -->
+<div class="container">
+  <div class="row">
+    <div class="col-lg-10 col-md-10 col-md-offset-1">
+      <ul class="pagination">
+          
+              <li class="previous">
+                <a href="/archives/2018/08/page/2/">
+                  <span class="symbol-left">&lt;</span>
+                  <span>上一页</span>
+                </a>
+              </li>
+          
+          
+      </ul>
+    </div>
+  </div>
+</div>
 
 
 
