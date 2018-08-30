@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="no one">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="IOC-概念小结"/>
+  <meta property="og:title" content="设计模式探险-适配器模式"/>
   <meta property="og:description" content="" />
   <meta property="og:site_name" content="no one&#39;s blog"/>
   <meta property="og:type" content="article" />
@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">IOC-概念小结</p>
+          <p class="title">设计模式探险-适配器模式</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -99,14 +99,14 @@
           
           <!-- Date -->
           <span class="date-time info">On
-            <span class="date">2018-08-27</span>
+            <span class="date">2018-08-30</span>
             <span class="time">11:33:08</span>
           </span>
           
           <!--  Categories  -->
             <span class="categories info">Under 
 
-<a href="/categories/IOC/">IOC</a>
+<a href="/categories/设计模式/">设计模式</a>
 </span>
           
         </div>
@@ -115,17 +115,55 @@
           <div class="post-tags text-muted">
             Tags: 
 
-<a class="tag" href="/tags/IOC/">#IOC</a> <a class="tag" href="/tags/概念/">#概念</a>
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/设计模式/">#设计模式</a>
 
 
           </div>
         
         <!-- Post Main Content -->
         <div class="post-content">
-          <h1 id="引言"><a href="#引言" class="headerlink" title="引言"></a>引言</h1><p>从自己的理解来看什么是IOC，以及什么是DI<br><a id="more"></a></p>
-<h1 id="IOC"><a href="#IOC" class="headerlink" title="IOC"></a>IOC</h1><p>IOC称为控制反转，即<strong>对象的控制权被反转</strong>。<br>在自己编写的程序中，是由自己来控制对象的创建以及生命周期。<br>而控制反转则是将对象的控制交由第三方机构（IOC容器）来完成，不再由程序来负责。  </p>
-<h1 id="DI"><a href="#DI" class="headerlink" title="DI"></a>DI</h1><p>DI称为依赖注入，即<strong>依赖对象通过注入的方式来获取</strong>。<br>DI是IOC的一种实现方式，即我们把设计好的类交由IOC容器，当对象需要依赖对象时，IOC容器将依赖对象注入。  </p>
-<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>IOC技术的重要目的就是为了<strong>解耦</strong>。</p>
+          <h1 id="适配器模式"><a href="#适配器模式" class="headerlink" title="适配器模式"></a>适配器模式</h1><h2 id="什么是适配器模式"><a href="#什么是适配器模式" class="headerlink" title="什么是适配器模式"></a>什么是适配器模式</h2><p>将已存在的类适配为目标接口，使得接口不兼容的类可以一起工作。<br><a id="more"></a></p>
+<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><p>创建已存在类的适配器类，让适配器类继承或者聚合已存在的类，再让适配器类实现目标接口。</p>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><pre><code class="java"><span class="comment">/* 已存在的类 */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adaptee</span> </span>{
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">specificRequest</span><span class="params">()</span></span>{
+        System.out.println(<span class="string">"specificRequest"</span>);
+    }
+}
+
+<span class="comment">/* 目标接口 */</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">Target</span> </span>{
+    <span class="comment">/* 客户端请求的方法 */</span>
+    <span class="function"><span class="keyword">void</span> <span class="title">request</span><span class="params">()</span></span>;
+}
+
+<span class="comment">/*  </span>
+<span class="comment">    适配器 将已存在的Adaptee适配Target接口</span>
+<span class="comment">    这里采用了聚合Adaptee</span>
+<span class="comment">    另一种实现方式是让适配器继承Adaptee</span>
+<span class="comment">*/</span>
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Adapter</span> <span class="keyword">implements</span> <span class="title">Target</span> </span>{
+    <span class="keyword">private</span> Adaptee adaptee;
+
+    <span class="function"><span class="keyword">public</span> <span class="title">Adapter</span><span class="params">(Adaptee adaptee)</span></span>{
+        <span class="keyword">this</span>.adaptee = adaptee;
+    }
+
+    <span class="meta">@Override</span>
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">request</span><span class="params">()</span> </span>{
+        adaptee.specificRequest();
+    }
+}
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">AdapterTest</span> </span>{
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>{
+        Adaptee adaptee = <span class="keyword">new</span> Adaptee();
+        Target target = <span class="keyword">new</span> Adapter(adaptee);
+        target.request();
+    }
+}
+</code></pre>
+<h2 id="适用场景"><a href="#适用场景" class="headerlink" title="适用场景"></a>适用场景</h2><p>如果要使用一个已存在的类，但它并不满足目标接口时，可以考虑将它适配目标接口。</p>
 
         </div>
       </div>
