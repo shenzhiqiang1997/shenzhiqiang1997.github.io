@@ -1,0 +1,168 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="no one">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="设计模式探险-享元模式"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="no one&#39;s blog"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://henzhiqiang1997.github.io"/>
+  
+    <link rel="alternate" href="/atom.xml" title="no one&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>no one's blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">设计模式探险-享元模式</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/shenzhiqiang1997">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1422537078@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By no one</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-09-03</span>
+            <span class="time">17:09:53</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/设计模式/">设计模式</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/设计模式/">#设计模式</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h1 id="享元模式"><a href="#享元模式" class="headerlink" title="享元模式"></a>享元模式</h1><h2 id="什么是享元模式"><a href="#什么是享元模式" class="headerlink" title="什么是享元模式"></a>什么是享元模式</h2><p>通过共享享元对象的内部状态复用大量细颗粒对象，从而节省内存。</p>
+<h2 id="概念"><a href="#概念" class="headerlink" title="概念"></a>概念</h2><p>内部状态：享元对象所共有的相同属性，不会因外部环境的影响而改变。<br>外部状态：享元对象之间不同的属性，会因外部环境的影响而改变。</p>
+<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><p>享元接口暴露外部状态的操作入口，使得客户端可以改变享元对象的外部状态。具体享元类实现享元接口并负责封装共享的内部状态。享元工厂内含一个map存放享元对象，客户端通过工厂获取享元对象，若有对应享元对象则返回，否则创建新的享元对象。</p>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br><span class="line">21</span><br><span class="line">22</span><br><span class="line">23</span><br><span class="line">24</span><br><span class="line">25</span><br><span class="line">26</span><br><span class="line">27</span><br><span class="line">28</span><br><span class="line">29</span><br><span class="line">30</span><br><span class="line">31</span><br><span class="line">32</span><br><span class="line">33</span><br><span class="line">34</span><br><span class="line">35</span><br><span class="line">36</span><br><span class="line">37</span><br><span class="line">38</span><br><span class="line">39</span><br><span class="line">40</span><br><span class="line">41</span><br><span class="line">42</span><br></pre></td><td class="code"><pre><span class="line"><span class="comment">/* 享元接口 暴露外部状态的操作入口 */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">interface</span> <span class="title">FlyWeight</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">void</span> <span class="title">operate</span><span class="params">(String extrinsicState)</span></span>;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 具体的享元类 封装内部状态 并实现享元接口 */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ConcreteFlyWeight</span> <span class="keyword">implements</span> <span class="title">FlyWeight</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> String intrinsicState;</span><br><span class="line"></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="title">ConcreteFlyWeight</span><span class="params">(String intrinsicState)</span></span>&#123;</span><br><span class="line">        <span class="keyword">this</span>.intrinsicState = intrinsicState;</span><br><span class="line">    &#125;</span><br><span class="line"></span><br><span class="line">    <span class="meta">@Override</span></span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">operate</span><span class="params">(String extrinsicState)</span> </span>&#123;</span><br><span class="line">        System.out.println(<span class="string">"intrinsicState:"</span>+intrinsicState);</span><br><span class="line">        System.out.println(<span class="string">"extrinsicState:"</span>+extrinsicState);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 享元工厂 为客户端提供享元对象 */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlyWeightFactory</span> </span>&#123;</span><br><span class="line">    <span class="keyword">private</span> Map&lt;String,FlyWeight&gt; flyWeights = <span class="keyword">new</span> HashMap&lt;&gt;();</span><br><span class="line">    <span class="function"><span class="keyword">public</span> FlyWeight <span class="title">getFlyWeight</span><span class="params">(String intrinsicState)</span></span>&#123;</span><br><span class="line">        FlyWeight flyWeight = flyWeights.get(intrinsicState);</span><br><span class="line">        <span class="keyword">if</span> (flyWeight == <span class="keyword">null</span>)&#123;</span><br><span class="line">            flyWeight = <span class="keyword">new</span> ConcreteFlyWeight(intrinsicState);</span><br><span class="line">            flyWeights.put(intrinsicState,flyWeight);</span><br><span class="line">        &#125;</span><br><span class="line">        <span class="keyword">return</span> flyWeight;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br><span class="line"></span><br><span class="line"><span class="comment">/* 客户端复用了 flyWeight享元对象 */</span></span><br><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">FlyWeightTest</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> </span>&#123;</span><br><span class="line">        FlyWeightFactory flyWeightFactory = <span class="keyword">new</span> FlyWeightFactory();</span><br><span class="line">        FlyWeight flyWeight = flyWeightFactory.getFlyWeight(<span class="string">"flyWeight"</span>);</span><br><span class="line">        flyWeight.operate(<span class="string">"A"</span>);</span><br><span class="line">        flyWeight.operate(<span class="string">"B"</span>);</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
