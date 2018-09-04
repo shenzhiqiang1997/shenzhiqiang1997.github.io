@@ -1,0 +1,169 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="no one">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="排序算法-希尔排序"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="no one&#39;s blog"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://henzhiqiang1997.github.io"/>
+  
+    <link rel="alternate" href="/atom.xml" title="no one&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>no one's blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">排序算法-希尔排序</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/shenzhiqiang1997">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1422537078@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By no one</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-09-04</span>
+            <span class="time">22:31:25</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/算法/">算法</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/算法/">#算法</a> <a class="tag" href="/tags/排序/">#排序</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h1 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>直接插入排序每轮插入的过程中只能通过一次次进行相邻元素比较才能实现，这使得右侧的元素可能要经过多次比较才能插入到左侧。<br>希尔排序则是对直接插入排序做了改进，将数组按照一定步长分为若干组，对每组进行直接插入排序，可以让右侧的元素在较少的操作下就跳跃到左侧来，使得数组整体宏观上大致有序。之后再逐渐缩小步，对每组元素进行直接插入排序，来进行小幅度调整，直到最终步长为1完成排序。<br><a id="more"></a></p>
+<h2 id="实现方式"><a href="#实现方式" class="headerlink" title="实现方式"></a>实现方式</h2><p>首先将步长设置为数组长度的一半，之后根据步长遍历每组，在每组内部进行直接插入排序。然后将步长减半，重复上述，对每组的元素进行直接插入排序，直到最后一次步长为1完成后数组将有序。</p>
+<h2 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h2><figure class="highlight java"><table><tr><td class="gutter"><pre><span class="line">1</span><br><span class="line">2</span><br><span class="line">3</span><br><span class="line">4</span><br><span class="line">5</span><br><span class="line">6</span><br><span class="line">7</span><br><span class="line">8</span><br><span class="line">9</span><br><span class="line">10</span><br><span class="line">11</span><br><span class="line">12</span><br><span class="line">13</span><br><span class="line">14</span><br><span class="line">15</span><br><span class="line">16</span><br><span class="line">17</span><br><span class="line">18</span><br><span class="line">19</span><br><span class="line">20</span><br></pre></td><td class="code"><pre><span class="line"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">ShellSort</span> </span>&#123;</span><br><span class="line">    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">sort</span><span class="params">(<span class="keyword">int</span>[] numbers)</span></span>&#123;</span><br><span class="line">        <span class="comment">/* 初始以数组长度/2为步长进行分组 之后不断将步长/2 直到步长为1进行最后一次分组*/</span></span><br><span class="line">        <span class="keyword">for</span> (<span class="keyword">int</span> d = numbers.length/<span class="number">2</span>; d &gt;= <span class="number">1</span>; d=d/<span class="number">2</span>) &#123;</span><br><span class="line">            <span class="comment">/* 每次分组后遍历每组元素 */</span></span><br><span class="line">            <span class="keyword">for</span> (<span class="keyword">int</span> i = <span class="number">0</span>; i &lt; d; i++) &#123;</span><br><span class="line">                <span class="comment">/* 对每组进行插入排序 */</span></span><br><span class="line">                <span class="keyword">for</span> (<span class="keyword">int</span> j = i; j &lt; numbers.length; j=j+d) &#123;</span><br><span class="line">                    <span class="keyword">for</span> (<span class="keyword">int</span> k = j; k &gt; <span class="number">0</span>; k=k-d) &#123;</span><br><span class="line">                        <span class="keyword">if</span> (numbers[k-<span class="number">1</span>]&gt;numbers[k])&#123;</span><br><span class="line">                            <span class="keyword">int</span> temp = numbers[k-<span class="number">1</span>];</span><br><span class="line">                            numbers[k-<span class="number">1</span>] = numbers[k];</span><br><span class="line">                            numbers[k] = temp;</span><br><span class="line">                        &#125;</span><br><span class="line">                    &#125;</span><br><span class="line">                &#125;</span><br><span class="line">            &#125;</span><br><span class="line">        &#125;</span><br><span class="line">    &#125;</span><br><span class="line">&#125;</span><br></pre></td></tr></table></figure>
+<h2 id="时间复杂度"><a href="#时间复杂度" class="headerlink" title="时间复杂度"></a>时间复杂度</h2><p>希尔排序在一开始步长较大，分组内元素较少，所以排序次数快。在之后的排序过程中由于之前的排序使得数组基本有序，速度也较快。所以希尔排序的时间复杂度优于直接插入排序，平均为O(n^1.3)。</p>
+<h2 id="稳定性"><a href="#稳定性" class="headerlink" title="稳定性"></a>稳定性</h2><p>由于分组内部进行交换，而不是相邻元素进行交换，所以相同元素的相对位置可能发生改变，是不稳定的。</p>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
