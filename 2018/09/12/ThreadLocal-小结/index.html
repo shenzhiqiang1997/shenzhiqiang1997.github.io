@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="no one">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="重建博客"/>
+  <meta property="og:title" content="IOC-概念小结"/>
   <meta property="og:description" content="" />
   <meta property="og:site_name" content="no one&#39;s blog"/>
   <meta property="og:type" content="article" />
@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">重建博客</p>
+          <p class="title">IOC-概念小结</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -99,14 +99,14 @@
           
           <!-- Date -->
           <span class="date-time info">On
-            <span class="date">2018-02-26</span>
+            <span class="date">2018-09-12</span>
             <span class="time">21:57:12</span>
           </span>
           
           <!--  Categories  -->
             <span class="categories info">Under 
 
-<a href="/categories/日常/">日常</a>
+<a href="/categories/Java/">Java</a>
 </span>
           
         </div>
@@ -115,14 +115,17 @@
           <div class="post-tags text-muted">
             Tags: 
 
-<a class="tag" href="/tags/闲言/">#闲言</a>
+<a class="tag" href="/tags/多线程/">#多线程</a> <a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/原理/">#原理</a>
 
 
           </div>
         
         <!-- Post Main Content -->
         <div class="post-content">
-          <h1 id="Hello-World"><a href="#Hello-World" class="headerlink" title="Hello World"></a>Hello World</h1><p><strong>Hello! I’m no one. I’m new here. <br><br><a id="more"></a><br>How beautiful the code world is! </strong></p>
+          <h1 id="ThreadLocal"><a href="#ThreadLocal" class="headerlink" title="ThreadLocal"></a>ThreadLocal</h1><h2 id="什么是ThreadLocal"><a href="#什么是ThreadLocal" class="headerlink" title="什么是ThreadLocal"></a>什么是ThreadLocal</h2><p>每个线程使用一个ThreadLocal对象时都会在线程中创建一个对应的副本，之后每次访问都是访问这个副本而不是ThreadLocal本身，ThreadLocal是线程私有的，是一种线程安全的方案。<br><a id="more"></a></p>
+<h2 id="实现原理"><a href="#实现原理" class="headerlink" title="实现原理"></a>实现原理</h2><p>每个线程都有一个ThreadLocalMap，每当调用一个ThreadLocal对象的set()，将会在线程对象中的ThreadLocalMap中插入/更新key为该ThreadLocal对象，value为设置的值的键值对。<br>每当调用一个ThreadLocal对象的get()，将会在线程对象的ThreadLocalMap中获取key为该ThreadLocal对象的键值对，然后将对应的value返回。</p>
+<h2 id="内存泄露"><a href="#内存泄露" class="headerlink" title="内存泄露"></a>内存泄露</h2><h4 id="为什么会内存泄露"><a href="#为什么会内存泄露" class="headerlink" title="为什么会内存泄露"></a>为什么会内存泄露</h4><p>在线程长时间不终止时，就算外部不再对ThreadLocalMap中的key和value引用，但ThreadLocalMap中始终对它们有着引用。这样的话，没用的键值对就始终不会被回收，造成内存泄露。</p>
+<h4 id="如何避免内存泄露"><a href="#如何避免内存泄露" class="headerlink" title="如何避免内存泄露"></a>如何避免内存泄露</h4><p>其实ThreadLocalMap设计上就已经考虑到内存泄露的问题并做了一些工作。<br>ThreadLocalMap中的Entry中是以虚引用的形式在引用着key，当外部不再引用key时，只剩下Entry对key的虚引用，在下次GC时该key会被回收，此时key变为null，但value仍然被Entry强引用。<br>只要调用ThreadLocal的get()、set()、remove()，就会顺带把key为null的Entry清理掉，但如果我们不去调用，仍然会造成内存泄漏。<br>所以避免内存泄露最好的方法就是在使用完ThreadLocal对象之后调用remove()清理掉它。</p>
 
         </div>
       </div>
