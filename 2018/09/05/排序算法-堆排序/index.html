@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-09-05</span>
-            <span class="time">17:40:04</span>
+            <span class="time">21:04:13</span>
           </span>
           
           <!--  Categories  -->
@@ -165,10 +165,10 @@
         numbers[<span class="number">0</span>] = numbers[root];
         <span class="comment">/* 找到左儿子的位置 */</span>
         <span class="keyword">int</span> k = root * <span class="number">2</span>;
-        <span class="comment">/* 当左儿子不是叶节点时应当继续调整结构 */</span>
-        <span class="keyword">while</span> (k &lt; n) {
-            <span class="comment">/* 找到左右儿子中最小的节点 之后k指向儿子中较小的那个*/</span>
-            <span class="keyword">if</span> (k + <span class="number">1</span> &lt; n &amp;&amp; numbers[k + <span class="number">1</span>] &lt; numbers[k]) k++;
+        <span class="comment">/* 当左儿子未超过范围时应当继续调整结构 */</span>
+        <span class="keyword">while</span> (k &lt;= n) {
+            <span class="comment">/* 当存在右儿子时 找到左右儿子中最小的节点 之后k指向儿子中较小的那个*/</span>
+            <span class="keyword">if</span> (k &lt; n &amp;&amp; numbers[k + <span class="number">1</span>] &lt; numbers[k]) k++;
             <span class="comment">/* 因为是自下而上地调整</span>
 <span class="comment">               如果根节点已经比儿子节点要小</span>
 <span class="comment">               则说明结构已经调整好了 退出循环</span>
