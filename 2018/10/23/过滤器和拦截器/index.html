@@ -100,7 +100,7 @@
           <!-- Date -->
           <span class="date-time info">On
             <span class="date">2018-10-23</span>
-            <span class="time">10:24:22</span>
+            <span class="time">10:46:01</span>
           </span>
           
           <!--  Categories  -->
@@ -125,6 +125,7 @@
           <h1 id="区别"><a href="#区别" class="headerlink" title="区别"></a>区别</h1><ol>
 <li>过滤器依赖于Servlet容器，拦截器不依赖于Servlet容器。</li>
 <li>过滤器对静态资源和动态资源的请求都起作用，拦截器只对动态资源的请求起作用。</li>
+<li>过滤器只能在Servlet执行前后起作用，而拦截器可以在方法前后，抛出异常前后起作用 </li>
 <li>过滤器不可以访问Spring上下文中的资源和对象，拦截器能够访问Spring上下文中的资源和对象。</li>
 <li>过滤器基于函数回调实现，拦截器基于反射实现（AOP）。</li>
 <li>过滤器和拦截器的执行时机不同。  <a id="more"></a>
