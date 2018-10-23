@@ -1,0 +1,266 @@
+<!DOCTYPE html>
+<html>
+  <!-- Html Head Tag-->
+  <head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="no one">
+  <!-- Open Graph Data -->
+  <meta property="og:title" content="过滤器和拦截器"/>
+  <meta property="og:description" content="" />
+  <meta property="og:site_name" content="no one&#39;s blog"/>
+  <meta property="og:type" content="article" />
+  <meta property="og:image" content="http://henzhiqiang1997.github.io"/>
+  
+    <link rel="alternate" href="/atom.xml" title="no one&#39;s blog" type="application/atom+xml">
+  
+  
+    <link rel="icon" href="/favicon.png">
+  
+
+  <!-- Site Title -->
+  <title>no one's blog</title>
+
+  <!-- Bootstrap CSS -->
+  <link rel="stylesheet" href="/css/bootstrap.min.css">
+  <!-- Custom CSS -->
+  
+  <link rel="stylesheet" href="/css/style.light.css">
+
+  <!-- Google Analytics -->
+  
+
+</head>
+
+  <body>
+    <!-- Page Header -->
+
+
+<header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="page-title with-background-image">
+          <p class="title">过滤器和拦截器</p>
+          <p class="subtitle"></p>
+        </div>
+        <div class="site-menu with-background-image">
+          <ul>
+            
+              <li>
+                <a href="/">
+                  
+                  Home
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="/archives">
+                  
+                  Archives
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="https://github.com/shenzhiqiang1997">
+                  
+                  Github
+                  
+                </a>
+              </li>
+            
+              <li>
+                <a href="mailto:1422537078@qq.com">
+                  
+                  Email
+                  
+                </a>
+              </li>
+            
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+</header>
+
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By no one</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-10-24</span>
+            <span class="time">00:55:24</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
+
+<a href="/categories/Java/">Java</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
+
+<a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/字节码增强/">#字节码增强</a> <a class="tag" href="/tags/AOP/">#AOP</a>
+
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h1 id="什么是字节码增强"><a href="#什么是字节码增强" class="headerlink" title="什么是字节码增强"></a>什么是字节码增强</h1><p>在运行时对目标类的字节码进行修改，然后将该字节码重新加载到JVM中，来替换原来的类或者生成新的类。<br><a id="more"></a></p>
+<h1 id="实现步骤"><a href="#实现步骤" class="headerlink" title="实现步骤"></a>实现步骤</h1><ol>
+<li>读取类的字节码</li>
+<li>修改类的字节码</li>
+<li>加载修改后的字节码  </li>
+</ol>
+<h1 id="实现代码"><a href="#实现代码" class="headerlink" title="实现代码"></a>实现代码</h1><p>这里使用的是Javassist框架<br>采用以下方法可以在方法语句前后插入语句，但是因为语句是分别进行编译的，后面增加的语句无法访问到前面的局部变量，所以会抛出异常。</p>
+<pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">Hello</span> </span>{
+    <span class="function"><span class="keyword">public</span> <span class="keyword">void</span> <span class="title">hello</span><span class="params">()</span> <span class="keyword">throws</span> InterruptedException </span>{
+        System.out.println(<span class="string">"hello"</span>);
+    }
+}
+
+<span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavassistTest</span> </span>{
+    <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>{
+        <span class="comment">// 从默认用户路径下获取class池</span>
+        ClassPool pool = ClassPool.getDefault();
+
+        <span class="comment">// 读取Hello的编译时class对象</span>
+        CtClass ctClass = pool.get(<span class="string">"priv.shen.javassist.Hello"</span>);
+
+        <span class="comment">// 从编译时class中获取到hello方法的编译时方法对象</span>
+        CtMethod ctMethod = ctClass.getDeclaredMethod(<span class="string">"hello"</span>);
+
+        <span class="comment">// 在方法语句前插入计时语句</span>
+        ctMethod.insertBefore(<span class="string">"long before = System.currentTimeMillis();\n"</span>);
+        <span class="comment">// 在方法语句后插入计算耗时并输出的语句</span>
+        ctMethod.insertAfter(<span class="string">"System.out.println(\"cost: \"+(System.currentTimeMillis()-before)+\" ms\");\n"</span>);
+
+
+        <span class="comment">// 将编译时class加载为运行时class对象，并实例化新的Hello类对象</span>
+        Hello hello = (Hello) ctClass.toClass().newInstance();
+        <span class="comment">// 运行新的hello</span>
+        hello.hello();
+
+    }
+}
+</code></pre>
+<p>采用以下方法来解决上面提到的在原语句前后添加的语句无法访问局部变量的问题，实现的功能为：</p>
+<ol>
+<li>将原方法命名为hello$old</li>
+<li>拷贝原方法，命名为hello</li>
+<li>拼接方法体，调用hello$old并在前后拼接计时语句</li>
+<li>将拼接好的方法体设置为hello的方法体</li>
+<li>将hello方法添加到类的class中</li>
+<li><p>最后调用CtClass对象的toClass()将修改后的字节码加载进JVM</p>
+<pre><code class="java"><span class="keyword">public</span> <span class="class"><span class="keyword">class</span> <span class="title">JavassistTest</span> </span>{
+ <span class="function"><span class="keyword">public</span> <span class="keyword">static</span> <span class="keyword">void</span> <span class="title">main</span><span class="params">(String[] args)</span> <span class="keyword">throws</span> Exception</span>{
+     <span class="comment">// 从默认用户路径下获取class池</span>
+     ClassPool pool = ClassPool.getDefault();
+
+     <span class="comment">// 读取Hello的编译时class对象</span>
+     CtClass ctClass = pool.get(<span class="string">"priv.shen.javassist.Hello"</span>);
+
+     <span class="comment">// 从编译时class中获取到hello方法的编译时方法对象</span>
+     CtMethod oldCtMethod = ctClass.getDeclaredMethod(<span class="string">"hello"</span>);
+     <span class="comment">// 将hello方法重新命名为hello$old 之后将创建新的hello方法来替换它</span>
+     oldCtMethod.setName(<span class="string">"hello$old"</span>);
+
+     <span class="comment">// 将hello$old 拷贝出来生成新的hello编译时方法对象</span>
+     CtMethod newCtMethod = CtNewMethod.copy(oldCtMethod,<span class="string">"hello"</span>,ctClass,<span class="keyword">null</span>);
+
+     <span class="comment">// 初始化StringBuffer用于拼接方法体</span>
+     StringBuffer methodBody = <span class="keyword">new</span> StringBuffer();
+     <span class="comment">// 拼接开始计时语句</span>
+     methodBody.append(<span class="string">"{long before = System.currentTimeMillis();\n"</span>);
+     <span class="comment">// 获取方法的范围值类型</span>
+     String returnType = oldCtMethod.getReturnType().getName();
+     <span class="comment">// 将开始拼接对原方法的调用，如果返回值不是void 需要保存原方法执行后的返回值</span>
+     <span class="keyword">if</span> (!<span class="string">"void"</span>.equals(returnType))
+         methodBody.append(returnType+<span class="string">" result = "</span>);
+     <span class="comment">// 拼接对原方法的调用，用$$代替原方法的参数</span>
+     methodBody.append(<span class="string">"hello$old($$);\n"</span>);
+     <span class="comment">// 拼接运行耗时计算语句</span>
+     methodBody.append(<span class="string">"System.out.println(\"cost: \"+(System.currentTimeMillis()-before)+\" ms\");\n"</span>);
+     <span class="comment">// 如果原方法有返回值则拼接返回结果的语句</span>
+     <span class="keyword">if</span> (!<span class="string">"void"</span>.equals(returnType))
+         methodBody.append(<span class="string">"return result;\n"</span>);
+     <span class="comment">// 拼接最后的方法的花括号 完成对方法体的拼接</span>
+     methodBody.append(<span class="string">"}"</span>);
+
+     <span class="comment">// 将拼接好的方法语句设置为新hello的方法体</span>
+     newCtMethod.setBody(methodBody.toString());
+     <span class="comment">// 将新的hello添加到class中</span>
+     ctClass.addMethod(newCtMethod);
+
+     <span class="comment">// 将编译时class加载为运行时class对象，并实例化新的Hello类对象</span>
+     Hello hello = (Hello) ctClass.toClass().newInstance();
+     <span class="comment">// 运行新的hello</span>
+     hello.hello();
+
+ }
+}
+</code></pre>
+</li>
+</ol>
+<h1 id="与AOP对比"><a href="#与AOP对比" class="headerlink" title="与AOP对比"></a>与AOP对比</h1><ol>
+<li>AOP基于反射调用原方法，而字节码增强是对原方法进行直接调用。从性能上来说，字节码增强更好。<br>将上面程序的耗时和AOP实现耗时进行对比，上面的程序只有0到1ms，而AOP却需要10ms到20ms。</li>
+<li>AOP的切点和切面要在运行前定义好，然后在运行时才产生代理对象。<br>而字节码增强，可以在程序运行时，直接操控程序对字节码进行修改和替换，对类进行增强。</li>
+<li>AOP更多地应用于有预见性的增强，比如日志记录，权限控制这类通用业务的处理。<br>而字节码增强更多地应用于非预见性的增强，比如说线上代码的性能检测这类突发的需求。</li>
+<li>AOP只需定义切面，语义性很强，定义的切面可以复用，更加通用和方便。<br>而字节码增强，需要对字节操控和加载，比较繁琐，且针对性比较强，不是那么通用和方便。</li>
+</ol>
+
+        </div>
+      </div>
+    </div>
+  </div>
+</article>
+
+
+
+    <!-- Footer -->
+<footer>
+  <div class="container">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <p class="copyright text-muted">
+          Theme By <a target="_blank" href="https://github.com/levblanc">Levblanc.</a>
+          Inspired By <a target="_blank" href="https://github.com/klugjo/hexo-theme-clean-blog">Clean Blog.</a>
+        <p class="copyright text-muted">
+          Powered By <a target="_blank" href="https://hexo.io/">Hexo.</a>
+        </p>
+      </div>
+    </div>
+  </div>
+</footer>
+
+
+    <!-- After Footer Scripts -->
+<script src="/js/highlight.pack.js"></script>
+<script>
+  document.addEventListener("DOMContentLoaded", function(event) {
+    var codeBlocks = Array.prototype.slice.call(document.getElementsByTagName('pre'))
+    codeBlocks.forEach(function(block, index) {
+      hljs.highlightBlock(block);
+    });
+  });
+</script>
+
+  </body>
+</html>
+
