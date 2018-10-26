@@ -94,30 +94,30 @@
     <div class="col-lg-10 col-md-10 col-md-offset-1">
       
         <div class="post-item-wrapper">
-  <a href="/2018/10/25/JVM工具/" class="post-title">
-      JVM工具
+  <a href="/2018/10/27/Session共享方案/" class="post-title">
+      Session共享方案
   </a>
   <div class="post-excerpt">
     <!-- Post Date and Categories -->
     <div class="date-and-category">
-      <div class="date">2018-10-25</div>
+      <div class="date">2018-10-27</div>
       <div class="categories">
         
           
 
-<a href="/categories/JVM/">JVM</a>
+<a href="/categories/Java-Web/">Java Web</a>
 
         
       </div>
     </div>
     <!-- Post Excerpt -->
-    <div class="excerpt typo"><h1 id="命令行工具"><a href="#命令行工具" class="headerlink" title="命令行工具"></a>命令行工具</h1><h2 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h2><p>即JVM Process Status Tools，用于查看虚拟机进程状态。<br>命令格式为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps [option]</span><br></pre></td></tr></table></figure></p></div>
+    <div class="excerpt typo"><h1 id="场景"><a href="#场景" class="headerlink" title="场景"></a>场景</h1><p>考虑这样一个场景：当有多台服务器，由于负载均衡或者分布式业务，使得用户在服务器上A登录之后，要在服务器B上访问用户的会话状态，如何才能够使得用户在访问服务器B时不用重新登录，服务器B直接获取到用户之前的会话状态。<br></div>
     <!-- Post Tags -->
     <div class="tags">
       
         
 
-<a class="tag" href="/tags/JVM/">JVM</a> <a class="tag" href="/tags/工具/">工具</a>
+<a class="tag" href="/tags/session/">session</a> <a class="tag" href="/tags/Java-Web/">Java Web</a> <a class="tag" href="/tags/业务场景/">业务场景</a>
 
 
       
@@ -151,6 +151,39 @@
         
 
 <a class="tag" href="/tags/JVM/">JVM</a> <a class="tag" href="/tags/GC/">GC</a>
+
+
+      
+    </div>
+  </div>
+</div>
+
+      
+        <div class="post-item-wrapper">
+  <a href="/2018/10/25/JVM工具/" class="post-title">
+      JVM工具
+  </a>
+  <div class="post-excerpt">
+    <!-- Post Date and Categories -->
+    <div class="date-and-category">
+      <div class="date">2018-10-25</div>
+      <div class="categories">
+        
+          
+
+<a href="/categories/JVM/">JVM</a>
+
+        
+      </div>
+    </div>
+    <!-- Post Excerpt -->
+    <div class="excerpt typo"><h1 id="命令行工具"><a href="#命令行工具" class="headerlink" title="命令行工具"></a>命令行工具</h1><h2 id="jps"><a href="#jps" class="headerlink" title="jps"></a>jps</h2><p>即JVM Process Status Tools，用于查看虚拟机进程状态。<br>命令格式为<br><figure class="highlight bash"><table><tr><td class="gutter"><pre><span class="line">1</span><br></pre></td><td class="code"><pre><span class="line">jps [option]</span><br></pre></td></tr></table></figure></p></div>
+    <!-- Post Tags -->
+    <div class="tags">
+      
+        
+
+<a class="tag" href="/tags/JVM/">JVM</a> <a class="tag" href="/tags/工具/">工具</a>
 
 
       
@@ -255,7 +288,7 @@
       
         
 
-<a class="tag" href="/tags/多线程/">多线程</a> <a class="tag" href="/tags/Java/">Java</a> <a class="tag" href="/tags/原理/">原理</a>
+<a class="tag" href="/tags/Java/">Java</a> <a class="tag" href="/tags/多线程/">多线程</a> <a class="tag" href="/tags/原理/">原理</a>
 
 
       
@@ -382,39 +415,6 @@
     </div>
     <!-- Post Excerpt -->
     <div class="excerpt typo"><h1 id="直接插入排序"><a href="#直接插入排序" class="headerlink" title="直接插入排序"></a>直接插入排序</h1><h2 id="如何实现"><a href="#如何实现" class="headerlink" title="如何实现"></a>如何实现</h2><p>初始时认为数组最左侧已经有序，从左到右会将当前元素插入到左侧已排序的元素中的合适的位置。寻找插入的位置的方法是与左侧的元素依次比较，如果左侧元素大于当前元素则将当前元素与左侧元素进行交换，最后一次交换到的位置就是该元素的插入位置。当对每个元素做完上述插入操作后整个数组变为有序。<br></div>
-    <!-- Post Tags -->
-    <div class="tags">
-      
-        
-
-<a class="tag" href="/tags/算法/">算法</a> <a class="tag" href="/tags/排序/">排序</a>
-
-
-      
-    </div>
-  </div>
-</div>
-
-      
-        <div class="post-item-wrapper">
-  <a href="/2018/09/04/排序算法-希尔排序/" class="post-title">
-      排序算法-希尔排序
-  </a>
-  <div class="post-excerpt">
-    <!-- Post Date and Categories -->
-    <div class="date-and-category">
-      <div class="date">2018-09-04</div>
-      <div class="categories">
-        
-          
-
-<a href="/categories/算法/">算法</a>
-
-        
-      </div>
-    </div>
-    <!-- Post Excerpt -->
-    <div class="excerpt typo"><h1 id="希尔排序"><a href="#希尔排序" class="headerlink" title="希尔排序"></a>希尔排序</h1><h2 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h2><p>直接插入排序每轮插入的过程中只能通过一次次进行相邻元素比较才能实现，这使得右侧的元素可能要经过多次比较才能插入到左侧。<br>希尔排序则是对直接插入排序做了改进，将数组按照一定步长分为若干组，对每组进行直接插入排序，可以让右侧的元素在较少的操作下就跳跃到左侧来，使得数组整体宏观上大致有序。之后再逐渐缩小步，对每组元素进行直接插入排序，来进行小幅度调整，直到最终步长为1完成排序。<br></div>
     <!-- Post Tags -->
     <div class="tags">
       
