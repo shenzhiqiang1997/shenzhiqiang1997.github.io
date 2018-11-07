@@ -8,7 +8,7 @@
   <meta name="description" content="">
   <meta name="author" content="no one">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="简单剖析红黑树"/>
+  <meta property="og:title" content="在浏览器中输入网址按下回车会发生什么"/>
   <meta property="og:description" content="" />
   <meta property="og:site_name" content="no one&#39;s blog"/>
   <meta property="og:type" content="article" />
@@ -43,7 +43,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">简单剖析红黑树</p>
+          <p class="title">在浏览器中输入网址按下回车会发生什么</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -99,14 +99,14 @@
           
           <!-- Date -->
           <span class="date-time info">On
-            <span class="date">2018-08-21</span>
-            <span class="time">21:09:06</span>
+            <span class="date">2018-11-07</span>
+            <span class="time">21:09:07</span>
           </span>
           
           <!--  Categories  -->
             <span class="categories info">Under 
 
-<a href="/categories/数据结构/">数据结构</a>
+<a href="/categories/计算机网络/">计算机网络</a>
 </span>
           
         </div>
@@ -115,23 +115,29 @@
           <div class="post-tags text-muted">
             Tags: 
 
-<a class="tag" href="/tags/数据结构/">#数据结构</a> <a class="tag" href="/tags/Java容器/">#Java容器</a>
+<a class="tag" href="/tags/计算机网络/">#计算机网络</a> <a class="tag" href="/tags/面试题/">#面试题</a>
 
 
           </div>
         
         <!-- Post Main Content -->
         <div class="post-content">
-          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>在Java容器实现中，当哈希冲突的情况较为严重时，经常选择将链表升级为红黑树来提高效率。<br>红黑树是一棵自平衡的二叉搜索树，它是由AVL变化而来的。<br><a id="more"></a><br><img src="https://note.youdao.com/yws/public/resource/708ad1b1ee41c2b335e0cac5c8d83d03/xmlnote/81E0CFCD7B784061BC381CDEA0098E23/13871" alt="image"></p>
-<h1 id="性质"><a href="#性质" class="headerlink" title="性质"></a>性质</h1><p>红黑树有以下特点  </p>
-<pre><code>1. 一个节点不是红色的就是黑色的
-2. 根节点是黑色的
-3. 叶节点（一般为NULL节点）是黑色的
-4. 一个红色节点的子节点必须是黑色的
-5. 从根节点到任意叶节点的所有路径的黑色节点个数相同
-</code></pre><p>上面这些性质使得红黑树中最长路径的长度不会大于最短路径的长度的两倍，这也使得红黑树是较为平衡的。</p>
-<h1 id="证明"><a href="#证明" class="headerlink" title="证明"></a>证明</h1><p>为什么红黑树中u字长路径的长度不会大于最短路径的长度的两倍<br>首先假设最短路径上的黑色节点数为n，<br>根据性质5我们可以知道最长路径上的黑色节点数也为n，  如果最长路径全为黑色节点那么则是最长路径最短的情况，长度为n。<br>结合性质4考虑出最长路径的最长情况，则是最长路径红黑相间，并且黑色节点与红色节点数量相同，那么最长路径的长度为2n。<br>再考虑最短路径上可能会有红色节点，也就是说最短路径的长度&gt;=n。<br>综上可以证明红黑树的最长路径的长度不会大于最短路径<br>的2倍。  </p>
-<h1 id="原因"><a href="#原因" class="headerlink" title="原因"></a>原因</h1><p>既然知道了Java容器偏爱红黑树，可为什么要选择红黑树呢。<br>我们知道AVL的搜索速度很快，但是由于AVL是近乎完美平衡的，这就导致了每次插入和删除时需要花费较大的开销计算平衡因子以此为依据来调整树的结构来使得其恢复为AVL。<br>而Java容器会频繁的插入和删除的操作，就需要使用AVL的变种，这种变种必须要能够提高插入和删除的效率，而红黑树恰恰就是满足这样要求的数据结构。<br>红黑树选择了放弃一部分的平衡性来换取插入和删除时的效率。<br>由于并不像AVL那样高度平衡，使得红黑树的查询速度稍微稍变得慢了一些。<br>总体上红黑树的查询、搜索、删除的时间复杂度为O(logn)，搜索速度稍逊于AVL，插入和删除速度优于AVL。<br>这就是Java容器选择红黑树作为哈希冲突解决方案的数据结构的原因</p>
+          <h1 id="概述"><a href="#概述" class="headerlink" title="概述"></a>概述</h1><p>一道经典的计算机网络面试题，一般来说越详细越好，能够凸显出基础功底。<br><a id="more"></a></p>
+<h1 id="流程"><a href="#流程" class="headerlink" title="流程"></a>流程</h1><ol>
+<li>检查浏览器的DNS缓存/操作系统的DNS缓存中是否有对应域名的IP</li>
+<li>如果没有，则要考虑向DNS服务器发送DNS查询报文。</li>
+<li>发送DNS查询报文之前要先检查DNS服务器是否在子网中，可以通过子网掩码和DNS服务器的IP做与操作来进行判断。</li>
+<li>如果DNS服务器跟当前主机在一个子网，则需要向DNS服务器发送DNS查询报文；否则，需要向网关路由器发送DNS查询报文，由网关路由器转发到外网的DNS服务器。下面将上面两种情况的发送目标目标主机。</li>
+<li>在发送DNS查询报文之前还要先检查ARP缓存中是否有目标主机IP对应的MAC地址，如果没有，要先通过ARP协议获取到目标主机的MAC地址才能成帧。</li>
+<li>主机广播一个以目标主机为目的IP的ARP查询报文，当目标主机接收之后，发现该ARP查询报文的目的IP是自己的IP，则会将自己的IP和MAC地址封装到ARP响应报文中发送回主机。</li>
+<li>主机向目的主机发送DNS查询报文，它封装成的帧的目的MAC地址为刚刚获取到的那个MAC地址。</li>
+<li>当DNS查询报文到达DNS服务器之后，DNS服务器首先检查本地是否有对应的DNS缓存。</li>
+<li>如果没有则将会通过轮询或者递归的方式向根、顶级、权威服务器查询到域名对应的IP。然后将域名和对应的IP封装到DNS响应报文中传送回主机。</li>
+<li>之后主机向服务器进行三次握手建立TCP连接，通过该TCP连接发送HTTP请求报文。</li>
+<li>服务器接收到HTTP请求后将请求的文档放在HTTP响应报文的body中发送回主机。</li>
+<li>主机接收到HTTP响应报文之后将文档取出，再根据文档中引用的对象，向服务器发送HTTP请求请求这些对象。</li>
+<li>当接收完这些对象之后，浏览器将文档和对象解析和渲染，然后在不需要这个TCP连接的时候通过四次挥手释放掉，完成整个过程。</li>
+</ol>
 
         </div>
       </div>
