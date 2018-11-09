@@ -8,10 +8,10 @@
   <meta name="description" content="">
   <meta name="author" content="no one">
   <!-- Open Graph Data -->
-  <meta property="og:title" content="no one&#39;s blog"/>
+  <meta property="og:title" content="Spring中@Autowired和@Resource的区别"/>
   <meta property="og:description" content="" />
   <meta property="og:site_name" content="no one&#39;s blog"/>
-  <meta property="og:type" content="website" />
+  <meta property="og:type" content="article" />
   <meta property="og:image" content="http://henzhiqiang1997.github.io"/>
   
     <link rel="alternate" href="/atom.xml" title="no one&#39;s blog" type="application/atom+xml">
@@ -35,8 +35,7 @@
 </head>
 
   <body>
-    <!-- Archive Header -->
-<!-- Page Header -->
+    <!-- Page Header -->
 
 
 <header class="site-header header-background" style="background-image: url(/img/default-banner-dark.jpg)">
@@ -44,7 +43,7 @@
     <div class="row">
       <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
         <div class="page-title with-background-image">
-          <p class="title">Blog Archives</p>
+          <p class="title">Spring中@Autowired和@Resource的区别</p>
           <p class="subtitle"></p>
         </div>
         <div class="site-menu with-background-image">
@@ -89,49 +88,54 @@
   </div>
 </header>
 
-<!-- Archive List -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
-      
-        <div class="archive-item">
-  <a href="/2018/03/04/简单剖析ORM框架实现原理/" class="post-title">
-    简单剖析ORM框架实现原理
-  </a>
-  <div class="date text-muted">Posted on 2018-03-04 15:33:05</div>
-</div>
+<article>
+  <div class="container typo">
+    <div class="row">
+      <div class="col-lg-8 col-lg-offset-2 col-md-10 col-md-offset-1">
+        <div class="post-info text-muted">
+          
+            <!-- Author -->
+            <span class="author info">By no one</span>
+          
+          <!-- Date -->
+          <span class="date-time info">On
+            <span class="date">2018-11-09</span>
+            <span class="time">20:46:13</span>
+          </span>
+          
+          <!--  Categories  -->
+            <span class="categories info">Under 
 
-      
-        <div class="archive-item">
-  <a href="/2018/02/26/重建博客/" class="post-title">
-    重建博客
-  </a>
-  <div class="date text-muted">Posted on 2018-02-26 20:30:27</div>
-</div>
+<a href="/categories/Spring/">Spring</a>
+</span>
+          
+        </div>
+        <!-- Tags -->
+        
+          <div class="post-tags text-muted">
+            Tags: 
 
-      
+<a class="tag" href="/tags/框架/">#框架</a> <a class="tag" href="/tags/区别/">#区别</a> <a class="tag" href="/tags/Java/">#Java</a> <a class="tag" href="/tags/Spring/">#Spring</a>
 
+
+          </div>
+        
+        <!-- Post Main Content -->
+        <div class="post-content">
+          <h1 id="Autowired"><a href="#Autowired" class="headerlink" title="@Autowired"></a>@Autowired</h1><p>是属于Spring的注解。<br><a id="more"></a><br>默认按照类型进行注入，当有没有或者有多个该类型的bean时将会抛出异常。<br>当有多个该类型的bean的时候，可以通过<code>@Qualifier</code>指定要注入的bean的名称。 </p>
+<h1 id="Resource"><a href="#Resource" class="headerlink" title="@Resource"></a>@Resource</h1><p>是属于J2EE的注解。<br>它有两个属性：<code>name</code>和<code>type</code>，分别表示要注入的bean名称和bean的类型。  </p>
+<ul>
+<li>默认情况下，先按照名称进行注入；如果没有对应名称的bean，则按照类型进行注入；如果都不行，则抛出异常。 </li>
+<li>当指定了name和type时，如果有相同类型和名称的bean则注入，否则抛出异常。</li>
+<li>当指定了name时，如果有相同名称的bean则注入，否则抛出异常。</li>
+<li>当指定了type时，如果有相同类型的bean则注入，如果没有或者有多个将抛出异常。</li>
+</ul>
+
+        </div>
+      </div>
     </div>
   </div>
-</div>
-<!-- Pagination -->
-<div class="container">
-  <div class="row">
-    <div class="col-lg-10 col-md-10 col-md-offset-1">
-      <ul class="pagination">
-          
-              <li class="previous">
-                <a href="/archives/page/9/">
-                  <span class="symbol-left">&lt;</span>
-                  <span>上一页</span>
-                </a>
-              </li>
-          
-          
-      </ul>
-    </div>
-  </div>
-</div>
+</article>
 
 
 
